@@ -11,8 +11,7 @@ sed -i "s^TARGET^${TARGET}^g" /etc/nginx/templates/default.conf.template
 sed -i "s^ALLOW_ORIGIN^${ALLOW_ORIGIN}^g" /etc/nginx/templates/default.conf.template
 sed -i "s^FROM^${FROM}^g" /etc/nginx/templates/default.conf.template
 
-cat /etc/nginx/templates/default.conf.template
-
+#cat /etc/nginx/templates/default.conf.template
 
 set -- "nginx" "-g" "daemon off;"
 
@@ -51,4 +50,4 @@ if [ "$1" = "nginx" -o "$1" = "nginx-debug" ]; then
 fi
 
 
-nginx -g "daemon off;"
+exec "$@"

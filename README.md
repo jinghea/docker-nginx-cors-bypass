@@ -20,6 +20,7 @@ This is a tool to proxy frontend request to backend to avoid such error for fron
 
 ### Build
 
+Ignore if running from dockerhub
 ```
 docker build -t nginx-cors-bypass .
 ```
@@ -35,6 +36,10 @@ docker run -p $PROXY_PORT:80 -e TARGET=$TARGET -e ALLOW_ORIGIN=$ALLOW_ORIGIN -e 
 * $ALLOW_ORIGIN: The origin url that the backend allowed.
 * $FROM: The frontend url.
 
+Running from dockerhub
+```
+docker run -p $PROXY_PORT:80 -e TARGET=$TARGET -e ALLOW_ORIGIN=$ALLOW_ORIGIN -e FROM=$FROM --name jing8h-docker-nginx-cors-bypass jing8h/docker-nginx-cors-bypass
+```
 
 <br/>
 An example:
@@ -46,7 +51,7 @@ An example:
 
 For this example
 ```
-docker run -p 8096:80 -e TARGET=http://host.docker.internal:8087/ -e ALLOW_ORIGIN=http://localhost:8080 -e FROM=http://localhost:4200 --name nginx-cors-bypass nginx-cors-bypass
+docker run -p 8096:80 -e TARGET=http://host.docker.internal:8087/ -e ALLOW_ORIGIN=http://localhost:8080 -e FROM=http://localhost:4200 --name jing8h-docker-nginx-cors-bypass jing8h/docker-nginx-cors-bypass
 ```
 
 
