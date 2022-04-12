@@ -6,7 +6,7 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN  chmod +x /docker-entrypoint.sh
 
 ENV TARGET http://host.docker.internal:8087/
-ENV ALLOW_ORIGIN http://localhost:8080
-ENV FROM http://localhost:4200
+ENV ALLOW_ORIGIN ''
+ENV COOKIE ''
 
 ENTRYPOINT ["/docker-entrypoint.sh"]

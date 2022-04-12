@@ -5,11 +5,21 @@
 echo "******************************************************************"
 echo "TARGET ${TARGET}"
 echo "ALLOW_ORIGIN ${ALLOW_ORIGIN}"
-#echo "FROM ${FROM}"
+echo "COOKIE ${COOKIE}"
 
 sed -i "s^TARGET^${TARGET}^g" /etc/nginx/templates/default.conf.template
-sed -i "s^ALLOW_ORIGIN^${ALLOW_ORIGIN}^g" /etc/nginx/templates/default.conf.template
-#sed -i "s^FROM^${FROM}^g" /etc/nginx/templates/default.conf.template
+
+if [ "x${ALLOW_ORIGIN}" == "x" ]; then
+  sed -i "s^SET_ALLOWED_ORIGIN^ ^g" /etc/nginx/templates/default.conf.template
+else
+  sed -i "s^SET_ALLOWED_ORIGIN^proxy_set_header Origin ${ALLOW_ORIGIN};^g" /etc/nginx/templates/default.conf.template
+fi
+
+if [ "x${COOKIE}" == "x" ]; then
+  sed -i "s^SET_COOKIE_HEADER^ ^g" /etc/nginx/templates/default.conf.template
+else
+  sed -i "s^SET_COOKIE_HEADER^proxy_set_header Cookie '${COOKIE}';^g" /etc/nginx/templates/default.conf.template
+fi
 
 #cat /etc/nginx/templates/default.conf.template
 

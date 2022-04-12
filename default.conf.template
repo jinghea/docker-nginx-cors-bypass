@@ -21,8 +21,13 @@ server {
             proxy_redirect off;
             proxy_set_header Host $proxy_host;
             proxy_set_header X-Real-IP $remote_addr;
+
+            SET_COOKIE_HEADER
+
             proxy_pass TARGET;
-            proxy_set_header Origin ALLOW_ORIGIN;
+
+            SET_ALLOWED_ORIGIN
+
             proxy_hide_header 'access-control-allow-origin';
             add_header 'Access-Control-Allow-Origin' '*';
 
